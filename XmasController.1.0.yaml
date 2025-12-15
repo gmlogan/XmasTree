@@ -2,6 +2,18 @@ packages:   # as a list
   - !include ./common-files/base-platform.yaml
   - !include ./common-files/esp32-panel.yaml
 
+# Screen timeout setting
+number:
+  - platform: template
+    name: "Screen Timeout"
+    id: display_timeout
+    optimistic: true
+    initial_value: 30
+    min_value: 10
+    max_value: 180
+    step: 5
+    unit_of_measurement: "s"
+
 # Extend touchscreen with wake-up behavior
 touchscreen:
   on_release:
@@ -87,7 +99,7 @@ color:
 # LVGL Configuration with Christmas Tree Images
 lvgl:
   on_idle:
-    timeout: 30s
+    timeout: !lambda "return (id(display_timeout).state * 1000);"
     then:
       - light.turn_off: backlight
       - lvgl.pause:
