@@ -1,0 +1,1 @@
+https://esphome.io/cookbook/lvgl/#turn-off-screen-when-idle

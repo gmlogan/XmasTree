@@ -2,6 +2,16 @@ packages:   # as a list
   - !include ./common-files/base-platform.yaml
   - !include ./common-files/esp32-panel.yaml
 
+# Extend touchscreen with wake-up behavior
+touchscreen:
+  on_release:
+    - if:
+        condition: lvgl.is_paused
+        then:
+          - lvgl.resume:
+          - lvgl.widget.redraw:
+          - light.turn_on: backlight
+
 # Track the Home Assistant switch states
 binary_sensor:
   - platform: homeassistant
@@ -76,6 +86,11 @@ color:
 
 # LVGL Configuration with Christmas Tree Images
 lvgl:
+  on_idle:
+    timeout: 30s
+    then:
+      - light.turn_off: backlight
+      - lvgl.pause:
   pages:
     - id: main_page
       bg_color: 0x111827
