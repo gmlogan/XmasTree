@@ -1,0 +1,135 @@
+packages:   # as a list
+  - !include ./common-files/base-platform.yaml
+  - !include ./common-files/esp32-panel.yaml
+
+# Track the Home Assistant switch states
+binary_sensor:
+  - platform: homeassistant
+    id: inside_lights_state
+    entity_id: input_boolean.inside_lights_master
+    on_state:
+      then:
+        - lvgl.image.update:
+            id: img_indoor
+            src: !lambda "return x ? tree_indoor_on : tree_indoor_off;"
+
+  - platform: homeassistant
+    id: outside_lights_state
+    entity_id: input_boolean.outside_lights_master
+    on_state:
+      then:
+        - lvgl.image.update:
+            id: img_outdoor
+            src: !lambda "return x ? tree_outdoor_on : tree_outdoor_off;"
+
+font:
+  - file:
+      type: gfonts
+      family: Roboto
+    id: roboto_24
+    size: 24
+    bpp: 4
+    glyphs: "!%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz"
+
+# Image definitions for Christmas trees
+image:
+  - file: "images/xmas_tree_indoor_on.svg"
+    id: tree_indoor_on
+    resize: 90x120
+    type: RGB565
+
+  - file: "images/xmas_tree_indoor_off.svg"
+    id: tree_indoor_off
+    resize: 90x120
+    type: RGB565
+
+  - file: "images/xmas_tree_outdoor_on.svg"
+    id: tree_outdoor_on
+    resize: 90x120
+    type: RGB565
+
+  - file: "images/xmas_tree_outdoor_off.svg"
+    id: tree_outdoor_off
+    resize: 90x120
+    type: RGB565
+
+color:
+  - id: my_white
+    red: 100%
+    green: 100%
+    blue: 100%
+
+  - id: my_red
+    red: 100%
+    green: 0%
+    blue: 0%
+
+  - id: my_blue
+    red: 0%
+    green: 0%
+    blue: 100%
+
+  - id: my_green
+    red: 0%
+    green: 100%
+    blue: 0%
+
+# LVGL Configuration with Christmas Tree Images
+lvgl:
+  pages:
+    - id: main_page
+      bg_color: 0x111827
+      widgets:
+        # Indoor Christmas Tree Container
+        - obj:
+            id: container_indoor
+            x: 50
+            y: 50
+            width: 90
+            height: 150
+            bg_opa: TRANSP
+            border_width: 0
+            widgets:
+              - image:
+                  id: img_indoor
+                  src: tree_indoor_off
+                  align: TOP_MID
+                  on_click:
+                    - logger.log: "Inside lights tree clicked - toggling"
+                    - homeassistant.service:
+                        service: input_boolean.toggle
+                        data:
+                          entity_id: input_boolean.inside_lights_master
+              - label:
+                  id: label_indoor
+                  text: "Indoor"
+                  text_color: 0xFFFFFF
+                  align: BOTTOM_MID
+                  text_font: roboto_24
+
+        # Outdoor Christmas Tree Container
+        - obj:
+            id: container_outdoor
+            x: 180
+            y: 50
+            width: 90
+            height: 150
+            bg_opa: TRANSP
+            border_width: 0
+            widgets:
+              - image:
+                  id: img_outdoor
+                  src: tree_outdoor_off
+                  align: TOP_MID
+                  on_click:
+                    - logger.log: "Outside lights tree clicked - toggling"
+                    - homeassistant.service:
+                        service: input_boolean.toggle
+                        data:
+                          entity_id: input_boolean.outside_lights_master
+              - label:
+                  id: label_outdoor
+                  text: "Outdoor"
+                  text_color: 0xFFFFFF
+                  align: BOTTOM_MID
+                  text_font: roboto_24

@@ -1,0 +1,25 @@
+<svg width="90" height="120" viewBox="0 0 90 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Tree layers (dark green/gray) -->
+  <polygon points="45,10 25,35 30,35 15,55 20,55 10,75 35,75 35,90 55,90 55,75 80,75 70,55 75,55 60,35 65,35" fill="#1a2e15"/>
+  <polygon points="45,12 27,35 32,35 17,55 22,55 12,75 37,75 37,88 53,88 53,75 78,75 68,55 73,55 58,35 63,35" fill="#243b1e"/>
+
+  <!-- Star on top (dimmed) -->
+  <polygon points="45,5 47,12 54,12 48,17 51,24 45,19 39,24 42,17 36,12 43,12" fill="#666666"/>
+
+  <!-- Trunk (darker) -->
+  <rect x="40" y="90" width="10" height="15" fill="#2a2015"/>
+
+  <!-- Lights/ornaments (dark/off) -->
+  <circle cx="32" cy="38" r="3" fill="#353535"/>
+  <circle cx="52" cy="40" r="3" fill="#303030"/>
+  <circle cx="42" cy="48" r="3" fill="#383838"/>
+  <circle cx="58" cy="52" r="3" fill="#323232"/>
+  <circle cx="30" cy="56" r="3" fill="#363636"/>
+  <circle cx="48" cy="60" r="3" fill="#343434"/>
+  <circle cx="68" cy="62" r="3" fill="#2d2d2d"/>
+  <circle cx="22" cy="70" r="3" fill="#313131"/>
+  <circle cx="42" cy="72" r="3" fill="#333333"/>
+  <circle cx="60" cy="68" r="3" fill="#3a3a3a"/>
+  <circle cx="36" cy="80" r="3" fill="#2e2e2e"/>
+  <circle cx="54" cy="78" r="3" fill="#323232"/>
+</svg>

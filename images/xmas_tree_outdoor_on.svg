@@ -1,0 +1,30 @@
+<svg width="90" height="120" viewBox="0 0 90 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Tree layers (green) -->
+  <polygon points="45,10 25,35 30,35 15,55 20,55 10,75 35,75 35,90 55,90 55,75 80,75 70,55 75,55 60,35 65,35" fill="#2d5016"/>
+  <polygon points="45,12 27,35 32,35 17,55 22,55 12,75 37,75 37,88 53,88 53,75 78,75 68,55 73,55 58,35 63,35" fill="#3a7d1f"/>
+
+  <!-- Star on top -->
+  <polygon points="45,5 47,12 54,12 48,17 51,24 45,19 39,24 42,17 36,12 43,12" fill="#ffffff"/>
+
+  <!-- Trunk -->
+  <rect x="40" y="90" width="10" height="15" fill="#4a3520"/>
+
+  <!-- Lights/ornaments (cooler colors for outdoor feel) -->
+  <circle cx="32" cy="38" r="3" fill="#ffffff"/>
+  <circle cx="52" cy="40" r="3" fill="#00bfff"/>
+  <circle cx="42" cy="48" r="3" fill="#ffffff"/>
+  <circle cx="58" cy="52" r="3" fill="#87ceeb"/>
+  <circle cx="30" cy="56" r="3" fill="#00bfff"/>
+  <circle cx="48" cy="60" r="3" fill="#ffffff"/>
+  <circle cx="68" cy="62" r="3" fill="#4169e1"/>
+  <circle cx="22" cy="70" r="3" fill="#87ceeb"/>
+  <circle cx="42" cy="72" r="3" fill="#00bfff"/>
+  <circle cx="60" cy="68" r="3" fill="#ffffff"/>
+  <circle cx="36" cy="80" r="3" fill="#4169e1"/>
+  <circle cx="54" cy="78" r="3" fill="#87ceeb"/>
+
+  <!-- Light glow effect -->
+  <circle cx="32" cy="38" r="4" fill="#ffffff" opacity="0.4"/>
+  <circle cx="52" cy="40" r="4" fill="#00bfff" opacity="0.4"/>
+  <circle cx="48" cy="60" r="4" fill="#ffffff" opacity="0.4"/>
+</svg>
