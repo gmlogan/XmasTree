@@ -1,0 +1,98 @@
+packages:   # as a list
+  - !include ./common-files/base-platform.yaml
+  - !include ./common-files/esp32-panel.yaml
+
+# Track the Home Assistant switch state
+binary_sensor:
+  - platform: homeassistant
+    id: inside_lights_state
+    entity_id: input_boolean.inside_lights_master
+    on_state:
+      then:
+        - lvgl.widget.update:
+            id: lv_button_indoor
+            state:
+              checked: !lambda "return x;"
+
+font:
+  - file:
+      type: gfonts
+      family: Roboto
+    id: roboto_24
+    size: 24
+    bpp: 4
+    glyphs: "!%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz"
+
+
+    
+    
+
+
+color:
+  - id: my_white
+    red: 100%
+    green: 100%
+    blue: 100%
+  
+  - id: my_red
+    red: 100%
+    green: 0%
+    blue: 0%
+  
+  - id: my_blue
+    red: 0%
+    green: 0%
+    blue: 100%
+  
+  - id: my_green
+    red: 0%
+    green: 100%
+    blue: 0%
+
+
+
+# LVGL Configuration
+lvgl:
+  pages:
+    - id: main_page
+      bg_color: 0x111827
+      widgets:
+        - button:
+            id: lv_button_indoor
+            x: 50
+            y: 50
+            width: 90
+            height: 120
+            bg_color: 0x4F46E5
+            checkable: true
+            widgets:
+              - label:
+                  text: "Indoor"
+                  text_color: 0xFFFFFF
+                  align: CENTER
+            on_click:
+              - logger.log: "Inside lights button clicked - toggling"
+              - homeassistant.service:
+                  service: input_boolean.toggle
+                  data:
+                    entity_id: input_boolean.inside_lights_master
+
+        - button:
+            id: lv_button_outdoor
+            x: 180
+            y: 50
+            width: 90
+            height: 120
+            bg_color: 0x4F46E5
+            checkable: true
+            widgets:
+              - label:
+                  text: "Outdoor"
+                  text_color: 0xFFFFFF
+                  align: CENTER
+            on_click:
+              - logger.log: "Outside lights button clicked - toggling"
+              - homeassistant.service:
+                  service: input_boolean.toggle
+                  data:
+                    entity_id: input_boolean.outside_lights_master
